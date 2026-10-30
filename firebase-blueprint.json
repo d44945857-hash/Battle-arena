@@ -1,0 +1,156 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Esports gamer profile and account details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string" },
+        "username": { "type": "string", "maxLength": 30 },
+        "ffUid": { "type": "string", "maxLength": 15 },
+        "ffIgn": { "type": "string", "maxLength": 30 },
+        "avatar": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "admin"] },
+        "status": { "type": "string", "enum": ["active", "blocked"] },
+        "depositBalance": { "type": "number" },
+        "winningBalance": { "type": "number" },
+        "totalKills": { "type": "number" },
+        "matchesPlayed": { "type": "number" },
+        "matchesWon": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "username", "ffUid", "role", "status"]
+    },
+    "AdminDoc": {
+      "title": "AdminDoc",
+      "description": "Marker document for admin authorization",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["admin"] }
+      },
+      "required": ["email", "role"]
+    },
+    "Tournament": {
+      "title": "Tournament",
+      "description": "Competitive Free Fire tournament event",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string", "maxLength": 100 },
+        "bannerUrl": { "type": "string" },
+        "mode": { "type": "string", "enum": ["Solo", "Duo", "Squad", "Clash Squad", "Battle Royale"] },
+        "map": { "type": "string", "enum": ["Bermuda", "Purgatory", "Kalahari", "Alpine", "Nexterra"] },
+        "matchType": { "type": "string", "enum": ["Free Entry", "Paid Entry", "High Roller", "Grand Championship"] },
+        "entryFee": { "type": "number" },
+        "prizePool": { "type": "number" },
+        "maxSlots": { "type": "number" },
+        "slotsFilled": { "type": "number" },
+        "matchTime": { "type": "string" },
+        "status": { "type": "string", "enum": ["upcoming", "live", "completed", "cancelled"] },
+        "roomId": { "type": "string" },
+        "roomPass": { "type": "string" },
+        "roomRevealed": { "type": "boolean" },
+        "version": { "type": "string" },
+        "resultsDeclared": { "type": "boolean" }
+      },
+      "required": ["id", "title", "mode", "map", "matchType", "entryFee", "prizePool", "maxSlots", "status"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Wallet deposit, withdrawal, entry fee or winning transaction",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "amount": { "type": "number" },
+        "type": { "type": "string", "enum": ["DEPOSIT", "WITHDRAWAL", "ENTRY_FEE", "PRIZE_WIN", "REFUND"] },
+        "status": { "type": "string", "enum": ["SUCCESS", "PENDING", "REJECTED", "FAILED"] },
+        "description": { "type": "string" },
+        "tournamentId": { "type": "string" },
+        "upiReference": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "amount", "type", "status"]
+    },
+    "WithdrawalRequest": {
+      "title": "WithdrawalRequest",
+      "description": "Player withdrawal request for winnings",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "username": { "type": "string" },
+        "amount": { "type": "number" },
+        "upiId": { "type": "string" },
+        "status": { "type": "string", "enum": ["PENDING", "APPROVED", "REJECTED"] },
+        "adminRemarks": { "type": "string" },
+        "requestedAt": { "type": "string" },
+        "processedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "amount", "upiId", "status", "requestedAt"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "System or match alert for player",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "type": { "type": "string", "enum": ["MATCH_START", "ROOM_CREDS", "WALLET", "WINNER", "SYSTEM"] },
+        "read": { "type": "boolean" },
+        "tournamentId": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "title", "message", "type", "read", "createdAt"]
+    },
+    "Announcement": {
+      "title": "Announcement",
+      "description": "Global esports announcement banner",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "badge": { "type": "string" },
+        "date": { "type": "string" },
+        "active": { "type": "boolean" }
+      },
+      "required": ["id", "title", "content", "badge", "active"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile, balance, and stats document"
+    },
+    "/admins/{userId}": {
+      "schema": "AdminDoc",
+      "description": "Admin identity markers"
+    },
+    "/tournaments/{tournamentId}": {
+      "schema": "Tournament",
+      "description": "Tournament events, custom room details and participant slots"
+    },
+    "/transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "Wallet transactions history"
+    },
+    "/withdrawals/{withdrawalId}": {
+      "schema": "WithdrawalRequest",
+      "description": "Withdrawal requests processed by admins"
+    },
+    "/notifications/{notificationId}": {
+      "schema": "Notification",
+      "description": "Player notifications and announcements"
+    },
+    "/announcements/{announcementId}": {
+      "schema": "Announcement",
+      "description": "Public tournament announcements"
+    }
+  }
+}

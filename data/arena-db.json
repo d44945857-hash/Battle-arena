@@ -1,0 +1,423 @@
+{
+  "users": [
+    {
+      "id": "admin_1",
+      "email": "admin@ffbattle.gg",
+      "phone": "9876543210",
+      "username": "FF_ARENA_COMMANDER",
+      "ffUid": "100000001",
+      "ffIgn": "FF_COMMANDER",
+      "avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=Commander&backgroundColor=b91c1c",
+      "role": "admin",
+      "status": "active",
+      "depositBalance": 25000,
+      "winningBalance": 50000,
+      "totalKills": 840,
+      "matchesPlayed": 120,
+      "matchesWon": 64,
+      "createdAt": "2026-09-30T00:45:32.097Z"
+    },
+    {
+      "id": "user_viper",
+      "email": "gamer@ffbattle.gg",
+      "phone": "9123456780",
+      "username": "ViperStriker_99",
+      "ffUid": "784920152",
+      "ffIgn": "VIPER・99",
+      "avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=Viper&backgroundColor=dc2626",
+      "role": "user",
+      "status": "active",
+      "depositBalance": 350,
+      "winningBalance": 840,
+      "totalKills": 284,
+      "matchesPlayed": 45,
+      "matchesWon": 18,
+      "createdAt": "2026-10-15T00:45:32.097Z"
+    },
+    {
+      "id": "user_apex",
+      "email": "apex@ffbattle.gg",
+      "phone": "9811223344",
+      "username": "ApexPredator",
+      "ffUid": "629401732",
+      "ffIgn": "APEX・GOD",
+      "avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=Apex&backgroundColor=ea580c",
+      "role": "user",
+      "status": "active",
+      "depositBalance": 200,
+      "winningBalance": 2450,
+      "totalKills": 412,
+      "matchesPlayed": 58,
+      "matchesWon": 29,
+      "createdAt": "2026-10-05T00:45:32.097Z"
+    },
+    {
+      "id": "user_blaze",
+      "email": "blaze@ffbattle.gg",
+      "phone": "9988776655",
+      "username": "BlazeHunter",
+      "ffUid": "891047219",
+      "ffIgn": "BLAZE・OP",
+      "avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=Blaze&backgroundColor=f59e0b",
+      "role": "user",
+      "status": "active",
+      "depositBalance": 150,
+      "winningBalance": 1200,
+      "totalKills": 330,
+      "matchesPlayed": 40,
+      "matchesWon": 15,
+      "createdAt": "2026-10-10T00:45:32.097Z"
+    }
+  ],
+  "tournaments": [
+    {
+      "id": "t_bermuda_mega_01",
+      "title": "Bermuda Grand Battle Royale #402",
+      "bannerUrl": "/src/assets/images/ff_tournament_hero_1793320526416.jpg",
+      "mode": "Battle Royale",
+      "map": "Bermuda",
+      "matchType": "Paid Entry",
+      "entryFee": 50,
+      "prizePool": 2400,
+      "prizeBreakdown": {
+        "rank1": 1000,
+        "rank2": 600,
+        "rank3": 300,
+        "perKill": 20
+      },
+      "maxSlots": 48,
+      "slotsFilled": 38,
+      "slots": [
+        {
+          "slotNumber": 1,
+          "userId": "user_viper",
+          "username": "ViperStriker_99",
+          "ffUid": "784920152",
+          "teamName": "Team Viper",
+          "registeredAt": "2026-10-29T23:45:32.097Z"
+        },
+        {
+          "slotNumber": 2,
+          "userId": "user_apex",
+          "username": "ApexPredator",
+          "ffUid": "629401732",
+          "teamName": "Apex Legion",
+          "registeredAt": "2026-10-29T23:47:12.097Z"
+        },
+        {
+          "slotNumber": 3,
+          "userId": "user_blaze",
+          "username": "BlazeHunter",
+          "ffUid": "891047219",
+          "teamName": "Blaze Squad",
+          "registeredAt": "2026-10-29T23:48:52.097Z"
+        }
+      ],
+      "matchTime": "2026-10-30T01:30:32.097Z",
+      "status": "upcoming",
+      "rules": [
+        "Emulators strictly banned. Mobile devices only.",
+        "Custom Room ID and Password will be provided 15 minutes before the match.",
+        "Teaming with other squads will result in immediate disqualification and account ban.",
+        "Hackers or script users will have their wallet balances permanently frozen.",
+        "Screenshots of winning match results must be preserved for dispute resolution."
+      ],
+      "roomId": "849201",
+      "roomPass": "7788",
+      "roomRevealed": false,
+      "version": "FF OB44",
+      "resultsDeclared": false
+    },
+    {
+      "id": "t_free_clash_02",
+      "title": "Clash Squad Daily Free Cup #109",
+      "bannerUrl": "/src/assets/images/ff_clash_squad_1793320529086.jpg",
+      "mode": "Clash Squad",
+      "map": "Bermuda",
+      "matchType": "Free Entry",
+      "entryFee": 0,
+      "prizePool": 500,
+      "prizeBreakdown": {
+        "rank1": 300,
+        "rank2": 200,
+        "perKill": 0
+      },
+      "maxSlots": 8,
+      "slotsFilled": 7,
+      "slots": [
+        {
+          "slotNumber": 1,
+          "userId": "user_apex",
+          "username": "ApexPredator",
+          "ffUid": "629401732",
+          "registeredAt": "2026-10-29T22:45:32.097Z"
+        }
+      ],
+      "matchTime": "2026-10-30T01:00:32.097Z",
+      "status": "upcoming",
+      "rules": [
+        "100% Free Entry for all registered gamers.",
+        "Room details unlocked 10 minutes prior to match.",
+        "Best of 7 rounds in Clash Squad.",
+        "Character skill allowed, Gun attributes disabled."
+      ],
+      "roomId": "901248",
+      "roomPass": "5566",
+      "roomRevealed": true,
+      "version": "FF OB44",
+      "resultsDeclared": false
+    },
+    {
+      "id": "t_purgatory_duo_03",
+      "title": "Purgatory Duo Tactical Showdown #88",
+      "bannerUrl": "/src/assets/images/ff_purgatory_map_1793320527659.jpg",
+      "mode": "Duo",
+      "map": "Purgatory",
+      "matchType": "Paid Entry",
+      "entryFee": 30,
+      "prizePool": 1500,
+      "prizeBreakdown": {
+        "rank1": 800,
+        "rank2": 400,
+        "rank3": 200,
+        "perKill": 10
+      },
+      "maxSlots": 24,
+      "slotsFilled": 24,
+      "slots": [
+        {
+          "slotNumber": 1,
+          "userId": "user_viper",
+          "username": "ViperStriker_99",
+          "ffUid": "784920152",
+          "teamName": "Viper Duo",
+          "registeredAt": "2026-10-29T00:45:32.097Z"
+        }
+      ],
+      "matchTime": "2026-10-30T00:35:32.097Z",
+      "status": "live",
+      "rules": [
+        "Duo match. Only 2 players per registered slot.",
+        "Airdrop weapons allowed.",
+        "Stream sniping will lead to tournament forfeit."
+      ],
+      "roomId": "739211",
+      "roomPass": "9900",
+      "roomRevealed": true,
+      "version": "FF OB44",
+      "resultsDeclared": false
+    },
+    {
+      "id": "t_kalahari_highroller_04",
+      "title": "Kalahari High Roller Elite Squad #15",
+      "bannerUrl": "/src/assets/images/ff_tournament_hero_1793320526416.jpg",
+      "mode": "Squad",
+      "map": "Kalahari",
+      "matchType": "High Roller",
+      "entryFee": 100,
+      "prizePool": 5000,
+      "prizeBreakdown": {
+        "rank1": 2500,
+        "rank2": 1500,
+        "rank3": 600,
+        "perKill": 25
+      },
+      "maxSlots": 12,
+      "slotsFilled": 10,
+      "slots": [],
+      "matchTime": "2026-10-30T03:45:32.097Z",
+      "status": "upcoming",
+      "rules": [
+        "Full 4-man squad roster required.",
+        "High prize pool: ₹25 per kill confirmed.",
+        "Room password published 15 minutes before kick-off."
+      ],
+      "roomId": "661849",
+      "roomPass": "4411",
+      "roomRevealed": false,
+      "version": "FF OB44",
+      "resultsDeclared": false
+    },
+    {
+      "id": "t_bermuda_solo_completed_05",
+      "title": "Bermuda Solo Blitzkrieg Championship #401",
+      "bannerUrl": "/src/assets/images/ff_tournament_hero_1793320526416.jpg",
+      "mode": "Solo",
+      "map": "Bermuda",
+      "matchType": "Paid Entry",
+      "entryFee": 40,
+      "prizePool": 2000,
+      "prizeBreakdown": {
+        "rank1": 900,
+        "rank2": 500,
+        "rank3": 200,
+        "perKill": 15
+      },
+      "maxSlots": 48,
+      "slotsFilled": 48,
+      "slots": [
+        {
+          "slotNumber": 1,
+          "userId": "user_apex",
+          "username": "ApexPredator",
+          "ffUid": "629401732",
+          "registeredAt": "2026-10-28T23:45:32.097Z",
+          "rank": 1,
+          "kills": 9,
+          "prizeWon": 1035
+        },
+        {
+          "slotNumber": 2,
+          "userId": "user_viper",
+          "username": "ViperStriker_99",
+          "ffUid": "784920152",
+          "registeredAt": "2026-10-28T23:45:32.097Z",
+          "rank": 2,
+          "kills": 6,
+          "prizeWon": 590
+        },
+        {
+          "slotNumber": 3,
+          "userId": "user_blaze",
+          "username": "BlazeHunter",
+          "ffUid": "891047219",
+          "registeredAt": "2026-10-28T23:45:32.097Z",
+          "rank": 3,
+          "kills": 4,
+          "prizeWon": 260
+        }
+      ],
+      "matchTime": "2026-10-29T00:45:32.097Z",
+      "status": "completed",
+      "rules": [
+        "Verified match. Result approved by Arena Admin."
+      ],
+      "roomId": "551829",
+      "roomPass": "1122",
+      "roomRevealed": true,
+      "version": "FF OB44",
+      "resultsDeclared": true
+    }
+  ],
+  "transactions": [
+    {
+      "id": "tx_seed_01",
+      "userId": "user_viper",
+      "amount": 500,
+      "type": "DEPOSIT",
+      "status": "SUCCESS",
+      "description": "UPI Deposit via PhonePe (UTR: 3948201948)",
+      "upiReference": "3948201948",
+      "createdAt": "2026-10-20T00:45:32.097Z"
+    },
+    {
+      "id": "tx_seed_02",
+      "userId": "user_viper",
+      "amount": 40,
+      "type": "ENTRY_FEE",
+      "status": "SUCCESS",
+      "description": "Entry Fee for Bermuda Solo Blitzkrieg #401",
+      "tournamentId": "t_bermuda_solo_completed_05",
+      "createdAt": "2026-10-29T00:45:32.097Z"
+    },
+    {
+      "id": "tx_seed_03",
+      "userId": "user_viper",
+      "amount": 590,
+      "type": "PRIZE_WIN",
+      "status": "SUCCESS",
+      "description": "Tournament Winner Prize - Rank 2 & 6 Kills (Bermuda Solo Blitzkrieg #401)",
+      "tournamentId": "t_bermuda_solo_completed_05",
+      "createdAt": "2026-10-29T01:58:52.097Z"
+    },
+    {
+      "id": "tx_seed_04",
+      "userId": "user_viper",
+      "amount": 50,
+      "type": "ENTRY_FEE",
+      "status": "SUCCESS",
+      "description": "Entry Fee for Bermuda Grand Battle Royale #402",
+      "tournamentId": "t_bermuda_mega_01",
+      "createdAt": "2026-10-29T23:45:32.097Z"
+    }
+  ],
+  "withdrawals": [
+    {
+      "id": "wd_seed_01",
+      "userId": "user_apex",
+      "username": "ApexPredator",
+      "amount": 500,
+      "upiId": "apex.gamer@okaxis",
+      "status": "APPROVED",
+      "adminRemarks": "Processed via ICICI IMPS Ref: 894102948",
+      "requestedAt": "2026-10-28T00:45:32.097Z",
+      "processedAt": "2026-10-28T02:45:32.097Z"
+    },
+    {
+      "id": "wd_seed_02",
+      "userId": "user_blaze",
+      "username": "BlazeHunter",
+      "amount": 300,
+      "upiId": "blaze99@paytm",
+      "status": "PENDING",
+      "requestedAt": "2026-10-29T22:45:32.097Z"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "notif_01",
+      "userId": "user_viper",
+      "title": "Room ID & Password Revealed!",
+      "message": "Room details for Clash Squad Daily Free Cup #109 are now available in your match dashboard.",
+      "type": "ROOM_CREDS",
+      "read": false,
+      "tournamentId": "t_free_clash_02",
+      "createdAt": "2026-10-30T00:35:32.097Z"
+    },
+    {
+      "id": "notif_02",
+      "userId": "user_viper",
+      "title": "Prize Winnings Credited! 🏆",
+      "message": "Congratulations! ₹590 has been credited to your Winning Balance for Rank 2 in Bermuda Solo Blitzkrieg #401.",
+      "type": "WINNER",
+      "read": false,
+      "tournamentId": "t_bermuda_solo_completed_05",
+      "createdAt": "2026-10-29T01:58:52.097Z"
+    },
+    {
+      "id": "notif_03",
+      "userId": "all",
+      "title": "Season 14 Tournament Pass is LIVE",
+      "message": "Welcome to FF BATTLE ARENA! Play official Free Fire custom room tournaments, climb the leaderboards, and withdraw real cash prizes instantly via UPI.",
+      "type": "SYSTEM",
+      "read": true,
+      "createdAt": "2026-10-23T00:45:32.097Z"
+    }
+  ],
+  "announcements": [
+    {
+      "id": "ann_01",
+      "title": "🔥 Season 14 Grand Championship Announced",
+      "content": "Registration for the ₹50,000 Mega Championship begins this weekend. Top 12 squads will qualify for the live-streamed grand finals.",
+      "badge": "MAJOR EVENT",
+      "date": "Today",
+      "active": true
+    },
+    {
+      "id": "ann_02",
+      "title": "⚡ Instant UPI Withdrawals Available 24/7",
+      "content": "Winnings are verified and credited immediately after match admin review. Minimum withdrawal is ₹50 with 0% processing fee.",
+      "badge": "WALLET UPDATE",
+      "date": "Active",
+      "active": true
+    },
+    {
+      "id": "ann_03",
+      "title": "🛡️ Zero Tolerance Anti-Cheat Notice",
+      "content": "All players must record screen during tournament matches. Any third-party configs, panel hacks, or aimbot scripts will lead to permanent hardware bans.",
+      "badge": "FAIR PLAY",
+      "date": "Notice",
+      "active": true
+    }
+  ]
+}

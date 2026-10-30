@@ -1,0 +1,6 @@
+{
+  "name": "FF BATTLE ARENA",
+  "description": "Professional mobile esports tournament platform for Free Fire players with real prize pools, live slot tracking, UPI wallet, verified room lobbies, leaderboards, and tournament management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

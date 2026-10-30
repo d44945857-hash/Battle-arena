@@ -1,0 +1,146 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global Safety Net: Default Deny All
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Health check ping for initial connection test
+    match /test/connection {
+      allow read: if true;
+    }
+
+    // Primitive Helpers
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // Bootstrapped Admin: user email from runtime (d44945857@gmail.com) or trusted /admins doc
+    function isAdmin() {
+      return isSignedIn() && (
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid)) ||
+        (request.auth.token.email == 'd44945857@gmail.com' && request.auth.token.email_verified == true)
+      );
+    }
+
+    // 1. Users Collection
+    match /users/{userId} {
+      function isValidUser(data) {
+        return data.id is string && data.id.size() <= 128 &&
+               data.username is string && data.username.size() >= 2 && data.username.size() <= 50 &&
+               data.ffUid is string && data.ffUid.size() >= 6 && data.ffUid.size() <= 20 &&
+               data.role in ['user', 'admin'] &&
+               data.status in ['active', 'blocked'] &&
+               data.depositBalance is number && data.depositBalance >= 0 &&
+               data.winningBalance is number && data.winningBalance >= 0;
+      }
+
+      allow get: if isSignedIn();
+      allow list: if isAdmin();
+      allow create: if isOwner(userId) && isValidUser(incoming()) && incoming().role == 'user' && incoming().status == 'active';
+      allow update: if (isAdmin() && isValidUser(incoming())) || (
+        isOwner(userId) &&
+        isValidUser(incoming()) &&
+        incoming().diff(existing()).affectedKeys().hasOnly(['username', 'ffUid', 'ffIgn', 'avatar'])
+      );
+      allow delete: if isAdmin();
+    }
+
+    // 2. Admins Collection
+    match /admins/{userId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    // 3. Tournaments Collection
+    match /tournaments/{tournamentId} {
+      function isValidTournament(data) {
+        return data.id is string && data.id.size() <= 128 &&
+               data.title is string && data.title.size() <= 150 &&
+               data.mode in ['Solo', 'Duo', 'Squad', 'Clash Squad', 'Battle Royale'] &&
+               data.map in ['Bermuda', 'Purgatory', 'Kalahari', 'Alpine', 'Nexterra'] &&
+               data.entryFee is number && data.entryFee >= 0 &&
+               data.prizePool is number && data.prizePool >= 0 &&
+               data.maxSlots is number && data.maxSlots > 0 &&
+               data.status in ['upcoming', 'live', 'completed', 'cancelled'];
+      }
+
+      allow get, list: if true; // Publicly readable for browse
+      allow create: if isAdmin() && isValidTournament(incoming());
+      allow update: if (isAdmin() && isValidTournament(incoming())) || (
+        // Action: Join or Leave slot by authenticated user
+        isSignedIn() &&
+        isValidTournament(incoming()) &&
+        incoming().diff(existing()).affectedKeys().hasOnly(['slots', 'slotsFilled'])
+      );
+      allow delete: if isAdmin();
+    }
+
+    // 4. Transactions Collection
+    match /transactions/{transactionId} {
+      function isValidTransaction(data) {
+        return data.id is string && data.id.size() <= 128 &&
+               data.userId is string && data.userId.size() <= 128 &&
+               data.amount is number && data.amount > 0 &&
+               data.type in ['DEPOSIT', 'WITHDRAWAL', 'ENTRY_FEE', 'PRIZE_WIN', 'REFUND'] &&
+               data.status in ['SUCCESS', 'PENDING', 'REJECTED', 'FAILED'];
+      }
+
+      allow get: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow list: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if (isAdmin() || (isSignedIn() && incoming().userId == request.auth.uid && incoming().type in ['DEPOSIT', 'ENTRY_FEE'])) && isValidTransaction(incoming());
+      allow update: if isAdmin() && isValidTransaction(incoming());
+      allow delete: if false; // Financial records are immutable
+    }
+
+    // 5. Withdrawals Collection
+    match /withdrawals/{withdrawalId} {
+      function isValidWithdrawal(data) {
+        return data.id is string && data.id.size() <= 128 &&
+               data.userId is string && data.userId.size() <= 128 &&
+               data.amount is number && data.amount >= 100 && data.amount <= 50000 &&
+               data.upiId is string && data.upiId.size() <= 100 &&
+               data.status in ['PENDING', 'APPROVED', 'REJECTED'];
+      }
+
+      allow get: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow list: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isSignedIn() && incoming().userId == request.auth.uid && incoming().status == 'PENDING' && isValidWithdrawal(incoming());
+      allow update: if isAdmin() && isValidWithdrawal(incoming()) && incoming().diff(existing()).affectedKeys().hasOnly(['status', 'adminRemarks', 'processedAt']);
+      allow delete: if isAdmin();
+    }
+
+    // 6. Notifications Collection
+    match /notifications/{notificationId} {
+      allow get: if isSignedIn() && (resource.data.userId == request.auth.uid || resource.data.userId == 'all' || isAdmin());
+      allow list: if isSignedIn() && (resource.data.userId == request.auth.uid || resource.data.userId == 'all' || isAdmin());
+      allow create: if isAdmin();
+      allow update: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin()) && incoming().diff(existing()).affectedKeys().hasOnly(['read']);
+      allow delete: if isAdmin();
+    }
+
+    // 7. Announcements Collection
+    match /announcements/{announcementId} {
+      allow get, list: if true;
+      allow write: if isAdmin();
+    }
+  }
+}
